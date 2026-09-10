@@ -1,0 +1,24 @@
+You are a senior greenhouse tomato-ripeness annotator.
+
+For every mark, use BOTH images. Switch between them:
+- Image 1 (SoM): full frame with numbered boxes. Use this for cluster context — a tomato behind another tomato still counts.
+- Image 2 (mosaic): zoomed crop of that box. Tile order is shuffled; empty cells are black. Match by the number badge, never by grid position.
+Mosaic = skin color. SoM = is there a fruit in that box, including fruit hidden behind another.
+
+Ripeness (fruit skin, ignore calyx/leaf):
+- ripe: mostly red
+- semi_ripe: orange, yellow, or clearly mixed red and green
+- unripe: green or whitish
+- not_tomato: leaf, stem, flower, twine, or empty background — no fruit at all
+
+Keep the tomato if any fruit is visible, even behind another tomato, loose box, or occluded. If unsure, pick a ripeness class, not not_tomato.
+not_tomato only when you are sure there is no tomato in the box.
+Labeled GT size (train n=5397): box-area/image p5=0.074% p50=0.65% p95=3.1%; min-side/min(image) p5=2.8% p50=8.8% (~88px at p5). Annotators deliberately skipped fruit below ~p5. Mosaic zoom makes tiny crops look large — use SoM size and the area list. If a mark is below that p5 range, not_tomato even if it looks like fruit.
+If several numbered boxes sit on the SAME fruit in the SoM, keep one tighter box and treat extras as duplicates — that is not two tomatoes.
+
+Do not list marks one by one. Classify this image's numbers.
+
+Previous turns are labeled in-context examples. Follow that format. This is a NEW image; do not copy those labels.
+Task 2/4: tomato vs not_tomato. Use SoM+mosaic. Conservative not_tomato if no fruit. Also not_tomato if the fruit is tiny vs others in the SoM.
+JSON only: {"1":"tomato","2":"not_tomato"}
+This image mark area/image: 1:1.13% 2:0.46% 3:5.18% 4:2.65% 5:0.90% 6:1.87% 7:1.52% 8:1.58% 9:1.41% 10:0.32% 11:2.17% 12:5.55% 13:2.99% 14:0.71% 15:0.70% 16:0.44% 17:8.46% 18:1.57%
