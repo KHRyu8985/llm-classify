@@ -212,6 +212,28 @@ det IoU 0.5. VLM 쪽은 모두 YOLO 1cls @ 0.1 proposal.
 | YOLO 1cls + VLM SFT | 0.637 | 0.762 | 0.808 | 0.695 | 0.784 |
 | YOLO 1cls + VLM SFT + RL | **0.670** | **0.795** | **0.840** | **0.738** | **0.806** |
 
+정성 비교는 `results/som_little/qual/` (패널: **GT | YOLO 3cls | YOLO 1cls | ours**).
+
+### 손가락 (IMG_1193)
+
+YOLO 3cls는 손·손가락을 ripe로 여러 장 잡는다. YOLO 1cls도 손에 박스가 많다. zero-shot은 `not_tomato`로 **토마토까지 전부 버림**. SFT/RL은 열매는 남기고 손은 대부분 버린다 (손가락에 박스 하나 남는 정도).
+
+![finger zeroshot](img/qual_finger_zeroshot.jpg)
+
+![finger RL](img/qual_finger_rl.jpg)
+
+### 송이 (IMG_1248)
+
+RL이 GT와 거의 같다. YOLO 3cls는 겹친 열매 경계가 더 지저분하다.
+
+![cluster RL](img/qual_cluster_rl.jpg)
+
+### 손으로 줄기를 잡은 경우 (IMG_1142)
+
+상단 손은 토마토가 아닌데 YOLO 3cls가 ripe를 잔뜩 찍는다. RL은 그 FP를 거의 안 낸다.
+
+![hand RL](img/qual_hand_rl.jpg)
+
 ---
 
 ## 7. 더 해볼 것

@@ -11,6 +11,7 @@ from som_common import (
 
 
 SRC = Path("results/som_little/qwen_inputs")
+QUAL = Path("results/som_little/qual")
 DST = Path("tutorial/img")
 FILES = {
     "query_input.jpg": "query_0/input.jpg",
@@ -19,6 +20,12 @@ FILES = {
     "vqa_filt.jpg": "vqa/filt/query/strip.jpg",
     "vqa_unripe.jpg": "vqa/unripe/query/strip.jpg",
     "vqa_ripe_semi.jpg": "vqa/ripe_semi/icl/strip.jpg",
+}
+QUAL_FILES = {
+    "qual_finger_rl.jpg": "rl/03.jpg",
+    "qual_finger_zeroshot.jpg": "zeroshot/03.jpg",
+    "qual_cluster_rl.jpg": "rl/07.jpg",
+    "qual_hand_rl.jpg": "rl/01.jpg",
 }
 
 
@@ -86,6 +93,8 @@ def main():
     y1 = collect_yolo1(train + test)
     dump_dedup(train, y1)
     ids_only(label_props(test[0], y1[test[0]["path"]])).save(DST / "query_ids_only.jpg", quality=90)
+    for dst, src in QUAL_FILES.items():
+        shutil.copy2(QUAL / src, DST / dst)
     print("ok", DST)
 
 
